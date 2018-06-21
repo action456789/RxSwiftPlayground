@@ -88,12 +88,12 @@ class HTTPAPI {
 
 
 example("HTTP异步回调") {
-//    HTTPAPI
-//        .events(forLast: 360, closed: false)
-//        .subscribe(onNext: { (data) in
-//            print(data)
-//        })
-//        .dispose()
+    HTTPAPI
+        .events(forLast: 360, closed: false)
+        .subscribe(onNext: { (data) in
+            print(data)
+        })
+        .dispose()
 }
 
 //: [Next](@next)

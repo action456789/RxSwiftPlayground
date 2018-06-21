@@ -37,11 +37,19 @@ extension Zhihu: CustomStringConvertible {
 }
 
 example("RxSwift进行网络请求") {
-    let url = URL(string: "https://zhuanlan.zhihu.com/api/columns/mrpeak")!
-    let request = URLRequest(url: url)
+    let disposeBag = DisposeBag()
     
-    URLSession.shared.rx
-        .data(request: request)
+    Observable
+        .from(["https://zhuanlan.zhihu.com/api/columns/mrpeak"])
+        .map { string -> URL in
+            return URL(string: string)!
+        }
+        .map { url -> URLRequest in
+            return URLRequest(url: url)
+        }
+        .flatMap { request -> Observable<Data> in
+            return URLSession.shared.rx.data(request: request)
+        }
         .map({ (data) -> Zhihu? in
             let decoder = JSONDecoder()
             var zhihu: Zhihu?
@@ -59,6 +67,7 @@ example("RxSwift进行网络请求") {
         }, onError: { (error) in
             print("Data Task Error: \(error)")
         })
+        .disposed(by: disposeBag)
 }
 
 //: [Next](@next)
