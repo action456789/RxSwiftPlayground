@@ -10,7 +10,7 @@ class ViewController1: UIViewController {
     
     // 代理
     private var _delegate = PublishSubject<String>()
-    var delegate: Observable<JSON> {
+    var delegate: Observable<String> {
         return _delegate.asObservable()
     }
     
@@ -23,8 +23,8 @@ class ViewController1: UIViewController {
         btn.frame = CGRect(x: 100, y: 100, width: 100, height: 44)
         
         btn.rx.tap
-            .subscribe(onNext: { [weak self]
-                if `self` = self {
+            .subscribe(onNext: { [weak self] in
+                if let `self` = self {
                     self._delegate.onNext("tap")
                 }
             })
@@ -46,9 +46,9 @@ class ViewController2: UIViewController {
         vc1.delegate
             .share()
             .subscribe(onNext: {
-                print($0)
+                print("vc1代理事件：" + $0)
             })
-            .disposed(by: vc1.bag)
+            .disposed(by: vc1.disposeBag)
         
     }
 }
