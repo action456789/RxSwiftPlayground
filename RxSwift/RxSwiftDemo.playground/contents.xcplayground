@@ -3,6 +3,14 @@
     <pages>
         <page name='Observable'/>
         <page name='ButtonEvent'/>
-        <page name='Delegate'/>
+        <page name='系统Delegate'/>
+        <page name='自定义Delegate'/>
+        <page name='网络请求'/>
+        <page name='异步回调-Old'/>
+        <page name='通知'/>
+        <page name='KVO Old'/>
+        <page name='KVO Rx'/>
+        <page name='异步回调_old'/>
+        <page name='异步回调1'/>
     </pages>
 </playground>
